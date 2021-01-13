@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div>
-      <h1 class="title">suteki_bank</h1>
-    </div>
+    <div></div>
   </div>
 </template>
 
