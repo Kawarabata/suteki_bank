@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div></div>
+  <div class="home">
+    <months-ribbon />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {}
 </script>
 
 <style scoped lang="postcss">
-.container {
+.home {
   margin: 0 auto;
   min-height: 100vh;
 }
