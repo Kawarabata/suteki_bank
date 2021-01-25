@@ -1,8 +1,7 @@
 <template>
-  <div class="home">
-    <button @click="googleLogout">ログアウト</button>
-    <title-header />
-    <months-ribbon />
+  <div class="sign-in-page">
+    <button @click="googleLogin">Googleでログイン</button>
+    {{ isSignedIn }}
   </div>
 </template>
 
@@ -14,15 +13,18 @@ export default {
     },
   },
   methods: {
-    googleLogout() {
-      this.$store.dispatch('me/signOut')
+    googleLogin() {
+      this.$store.dispatch('me/signIn')
     },
   },
 }
 </script>
 
 <style scoped lang="postcss">
-.home {
+.sign-in-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   min-height: 100vh;
 }
