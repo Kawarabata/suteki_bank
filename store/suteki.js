@@ -61,6 +61,7 @@ export const actions = {
         .firestore()
         .collection('sutekis')
         .where('userId', '==', rootState.me.id)
+        .orderBy('date')
         .get()
       const sutekis = response.docs.map((doc) => doc.data())
       commit('setSutekis', sutekis)
