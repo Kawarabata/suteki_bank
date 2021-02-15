@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <button @click="googleLogout">ログアウト</button>
+    <button class="logout-button" @click="googleLogout">ログアウト</button>
     <title-header :price-sum="priceSum" />
     <months-ribbon />
     <button class="add-button" @click="openModal">
@@ -92,6 +92,12 @@ export default {
   margin: 0 auto;
   padding-bottom: 100px;
   min-height: 100vh;
+
+  & .logout-button {
+    color: #eee;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
 
   & .table-container {
     max-width: 580px;

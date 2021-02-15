@@ -6,17 +6,19 @@
   >
     <div class="modal">
       <label>
-        <span>日付</span>
         <input type="date" @input="$emit('update-date', $event.target.value)" />
       </label>
       <label>
-        <span>良いこと</span>
-        <input type="text" @input="$emit('update-text', $event.target.value)" />
+        <input
+          type="text"
+          placeholder="良いこと"
+          @input="$emit('update-text', $event.target.value)"
+        />
       </label>
       <label>
-        <span>金額</span>
         <input
           type="number"
+          placeholder="金額"
           min="1"
           @input="$emit('update-price', $event.target.value)"
         />
@@ -56,7 +58,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 90%;
     padding: 36px 30px;
     border: 5px solid #c4d700;
     background-color: #fff;
@@ -64,6 +66,17 @@ export default {
     & > * + * {
       margin-top: 20px;
     }
+  }
+
+  & label {
+    width: 100%;
+  }
+
+  & input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d2d2d2;
+    border-radius: 8px;
   }
 
   & button {
