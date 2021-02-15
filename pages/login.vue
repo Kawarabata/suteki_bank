@@ -1,12 +1,17 @@
 <template>
   <div class="sign-in-page">
     <button @click="googleLogin">Googleでログイン</button>
-    {{ isSignedIn }}
   </div>
 </template>
 
 <script>
 export default {
+  mounted() {
+    if (this.isSignedIn) {
+      // FIXME: middleware/authenticatedで完結したいけどなぜか本番だとうまくいかないので追加している
+      this.$router.push('/')
+    }
+  },
   computed: {
     isSignedIn() {
       return this.$store.state.me.isSignedIn
@@ -27,5 +32,13 @@ export default {
   align-items: center;
   margin: 0 auto;
   min-height: 100vh;
+
+  & button {
+    padding: 12px;
+    background-color: #c4d700;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+  }
 }
 </style>

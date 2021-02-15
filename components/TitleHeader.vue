@@ -4,11 +4,22 @@
     <div class="sum">
       <div>
         <span>今までの総額</span>
-        <span class="price">￥{{ 1000 }}</span>
+        <span class="price">￥{{ priceSum }}</span>
       </div>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  props: {
+    priceSum: {
+      type: Number,
+      default: 0,
+    },
+  },
+}
+</script>
 
 <style scoped lang="postcss">
 .title-header {

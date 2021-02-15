@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from '@/plugins/firebase'
 
 export const state = () => ({
   isSignedIn: false,
@@ -36,11 +36,18 @@ export const mutations = {
 }
 
 export const actions = {
-  async signIn() {
+  async signIn({ state }) {
     const provider = new firebase.auth.GoogleAuthProvider()
     try {
       await firebase.auth().signInWithPopup(provider)
+      console.log(state)
+      await firebase
+        .firestore()
+        .collection('users')
+        .doc(state.id)
+        .set({ name: state.name })
     } catch (error) {
+      console.log(error)
       return {
         error: { message: error.message },
       }

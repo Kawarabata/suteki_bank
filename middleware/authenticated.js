@@ -8,6 +8,7 @@ export default function ({ route, store, redirect }) {
       if (route.path !== '/') {
         redirect('/')
       }
+      await store.dispatch('suteki/fetchSutekis')
     } else {
       await store.commit('me/setIsSignedIn', false)
 
