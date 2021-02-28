@@ -1,4 +1,3 @@
-// import { databaseRepository } from '@/repository'
 import firebase from '@/plugins/firebase'
 
 // type Suteki = {
@@ -46,9 +45,7 @@ export const actions = {
       await firebase.firestore().collection('sutekis').add(state.params)
       commit('resetParams')
       await dispatch('fetchSutekis')
-      console.log('完了')
     } catch (error) {
-      console.error(error)
       return {
         error: { message: error.message },
       }
@@ -66,7 +63,6 @@ export const actions = {
       const sutekis = response.docs.map((doc) => doc.data())
       commit('setSutekis', sutekis)
     } catch (error) {
-      console.error(error)
       return {
         error: { message: error.message },
       }

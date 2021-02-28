@@ -40,14 +40,12 @@ export const actions = {
     const provider = new firebase.auth.GoogleAuthProvider()
     try {
       await firebase.auth().signInWithPopup(provider)
-      console.log(state)
       await firebase
         .firestore()
         .collection('users')
         .doc(state.id)
         .set({ name: state.name })
     } catch (error) {
-      console.log(error)
       return {
         error: { message: error.message },
       }
@@ -64,15 +62,4 @@ export const actions = {
     context.commit('setName', user.displayName)
     context.commit('setImageUrl', user.photoUrl)
   },
-
-  // async checkSignedIn() {
-  //   console.log('aa')
-  //   const result = await new Promise((resolve, reject) => {
-  //     firebase.auth().onAuthStateChanged((user) => {
-  //       resolve({ data: user != null })
-  //     })
-  //   })
-  //   console.log(result)
-  //   this.context.commit('setIsSignedIn', result.data)
-  // },
 }
