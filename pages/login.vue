@@ -6,12 +6,6 @@
 
 <script>
 export default {
-  mounted() {
-    if (this.isSignedIn) {
-      // FIXME: middleware/authenticatedで完結したいけどなぜか本番だとうまくいかないので追加している
-      this.$router.push('/')
-    }
-  },
   computed: {
     isSignedIn() {
       return this.$store.state.me.isSignedIn

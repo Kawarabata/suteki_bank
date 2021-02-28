@@ -50,10 +50,6 @@ export default {
     },
   },
 
-  router: {
-    middleware: ['authenticated'],
-  },
-
   env: {
     API_KEY: process.env.API_KEY || '',
     AUTH_DOMAIN: process.env.AUTH_DOMAIN || '',

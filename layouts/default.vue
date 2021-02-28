@@ -2,6 +2,31 @@
   <Nuxt />
 </template>
 
+<script>
+import firebase from 'firebase'
+
+export default {
+  mounted() {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        await this.$store.dispatch('me/setUserDataFromGoogle', user)
+
+        if (this.$route.path !== '/') {
+          this.$router.push('/')
+        }
+        await this.$store.dispatch('suteki/fetchSutekis')
+      } else {
+        await this.$store.commit('me/setIsSignedIn', false)
+
+        if (this.$route.path !== '/login') {
+          this.$router.push('/login')
+        }
+      }
+    })
+  },
+}
+</script>
+
 <style>
 html {
   font-family: serif;
