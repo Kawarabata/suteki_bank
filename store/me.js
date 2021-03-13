@@ -46,9 +46,7 @@ export const actions = {
         .doc(state.id)
         .set({ name: state.name })
     } catch (error) {
-      return {
-        error: { message: error.message },
-      }
+      console.error(error)
     }
   },
 

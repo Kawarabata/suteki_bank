@@ -56,9 +56,7 @@ export const actions = {
       commit('resetParams')
       await dispatch('fetchSutekis')
     } catch (error) {
-      return {
-        error: { message: error.message },
-      }
+      console.error(error)
     }
   },
 
@@ -72,9 +70,18 @@ export const actions = {
       commit('resetParams')
       await dispatch('fetchSutekis')
     } catch (error) {
-      return {
-        error: { message: error.message },
+      console.error(error)
+    }
+  },
+
+  async deleteSuteki({ state, commit, dispatch }, id) {
+    try {
+      if (id) {
+        await firebase.firestore().collection('sutekis').doc(id).delete()
       }
+      await dispatch('fetchSutekis')
+    } catch (error) {
+      console.error(error)
     }
   },
 
@@ -91,9 +98,7 @@ export const actions = {
       })
       commit('setSutekis', sutekis)
     } catch (error) {
-      return {
-        error: { message: error.message },
-      }
+      console.error(error)
     }
   },
 }

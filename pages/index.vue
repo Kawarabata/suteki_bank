@@ -20,6 +20,7 @@
         @update-date="updateParams('date', $event)"
         @update-text="updateParams('text', $event)"
         @update-price="updateParams('price', Math.floor($event))"
+        @delete-suteki="deleteSuteki"
         @submit="submit"
       />
     </transition>
@@ -86,6 +87,11 @@ export default {
 
     updateParams(fieldName, value) {
       this.$store.commit('suteki/updateParams', { [fieldName]: value })
+    },
+
+    deleteSuteki() {
+      this.$store.dispatch('suteki/deleteSuteki', this.params.id)
+      this.closeModal()
     },
 
     submit() {

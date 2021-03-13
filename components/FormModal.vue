@@ -29,9 +29,18 @@
           @input="$emit('update-price', $event.target.value)"
         />
       </label>
-      <button type="submit" :class="{ submittable: isSubmittable }">
-        保存
-      </button>
+      <div class="buttons">
+        <button
+          type="button"
+          class="delete-button"
+          @click="$emit('delete-suteki')"
+        >
+          削除
+        </button>
+        <button type="submit" :class="{ submittable: isSubmittable }">
+          保存
+        </button>
+      </div>
     </div>
   </form>
 </template>
@@ -97,16 +106,28 @@ export default {
     border-radius: 8px;
   }
 
-  & button {
-    width: fit-content;
-    padding: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #eee;
+  & .buttons {
+    display: flex;
 
-    &.submittable {
-      background-color: #c4d700;
+    & button {
+      width: fit-content;
+      padding: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #eee;
+
+      &.submittable {
+        background-color: #c4d700;
+      }
+
+      & + button {
+        margin-left: 50px;
+      }
+    }
+
+    & .delete-button {
+      background-color: #f49c2d;
     }
   }
 }
