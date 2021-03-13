@@ -112,7 +112,7 @@ export default {
   min-height: 100vh;
 
   & .logout-button {
-    color: #eee;
+    color: #aaa;
     border: 1px solid #eee;
     border-radius: 4px;
   }

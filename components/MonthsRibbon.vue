@@ -1,18 +1,18 @@
 <template>
   <div class="months-ribbon">
     <ul>
-      <li>1月</li>
-      <li>2月</li>
-      <li>3月</li>
-      <li>4月</li>
-      <li>5月</li>
-      <li>6月</li>
-      <li>7月</li>
-      <li>8月</li>
-      <li>9月</li>
-      <li>10月</li>
-      <li>11月</li>
-      <li>12月</li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
     </ul>
   </div>
 </template>
@@ -22,13 +22,7 @@
   & ul {
     display: flex;
     flex-wrap: nowrap;
-    overflow: scroll;
-    -ms-overflow-style: none; /* IE, Edge対応 */
-    scrollbar-width: none; /* Firefox対応 */
-
-    &::-webkit-scrollbar {
-      display: none; /* Chrome, Safari対応 */
-    }
+    overflow: hidden;
   }
 
   & li {

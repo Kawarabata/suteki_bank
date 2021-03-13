@@ -15,7 +15,7 @@
       >
         <td class="date">{{ suteki.date }}</td>
         <td class="text">{{ suteki.text }}</td>
-        <td>{{ suteki.price }}円</td>
+        <td>{{ suteki.price.toLocaleString() }}円</td>
       </tr>
     </tbody>
   </table>
@@ -56,7 +56,7 @@ export default {
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: #eee;
+        background-color: #fffae0;
         cursor: pointer;
       }
     }

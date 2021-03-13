@@ -4,7 +4,7 @@
     <div class="sum">
       <div>
         <span>今までの総額</span>
-        <span class="price">￥{{ priceSum }}</span>
+        <span class="price">￥{{ priceSum.toLocaleString() }}</span>
       </div>
     </div>
   </header>
