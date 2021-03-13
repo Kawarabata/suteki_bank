@@ -8,7 +8,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(suteki, index) in sutekis" :key="index">
+      <tr
+        v-for="(suteki, index) in sutekis"
+        :key="index"
+        @click="$emit('open-modal', suteki)"
+      >
         <td class="date">{{ suteki.date }}</td>
         <td class="text">{{ suteki.text }}</td>
         <td>{{ suteki.price }}円</td>
@@ -45,6 +49,17 @@ export default {
 
   & td {
     padding: 12px;
+  }
+
+  & tbody {
+    & tr {
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #eee;
+        cursor: pointer;
+      }
+    }
   }
 
   & .date {

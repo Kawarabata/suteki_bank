@@ -22,16 +22,13 @@ export const mutations = {
     state.sutekis = sutekis
   },
 
-  addSuteki(state, suteki) {
-    state.sutekis = [...state.sutekis, suteki]
-  },
-
   updateParams(state, payload) {
     state.params = { ...state.params, ...payload }
   },
 
   resetParams(state) {
     state.params = {
+      id: '',
       text: '',
       price: 0,
       date: '',
@@ -40,9 +37,38 @@ export const mutations = {
 }
 
 export const actions = {
-  async addSuteki({ state, commit, dispatch }) {
+  async addOrUpdateSuteki({ dispatch }, params) {
+    if (params.id) {
+      await dispatch('updateSuteki', params)
+    } else {
+      await dispatch('addSuteki', params)
+    }
+  },
+
+  async addSuteki({ commit, dispatch }, params) {
     try {
-      await firebase.firestore().collection('sutekis').add(state.params)
+      await firebase.firestore().collection('sutekis').add({
+        date: params.date,
+        text: params.text,
+        price: params.price,
+        userId: params.userId,
+      })
+      commit('resetParams')
+      await dispatch('fetchSutekis')
+    } catch (error) {
+      return {
+        error: { message: error.message },
+      }
+    }
+  },
+
+  async updateSuteki({ commit, dispatch }, params) {
+    try {
+      await firebase.firestore().collection('sutekis').doc(params.id).update({
+        date: params.date,
+        text: params.text,
+        price: params.price,
+      })
       commit('resetParams')
       await dispatch('fetchSutekis')
     } catch (error) {
@@ -60,7 +86,9 @@ export const actions = {
         .where('userId', '==', rootState.me.id)
         .orderBy('date')
         .get()
-      const sutekis = response.docs.map((doc) => doc.data())
+      const sutekis = response.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() }
+      })
       commit('setSutekis', sutekis)
     } catch (error) {
       return {

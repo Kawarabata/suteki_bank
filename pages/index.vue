@@ -7,17 +7,22 @@
       <img src="@/assets/images/button_add.svg" alt="追加" />
     </button>
     <div class="table-container">
-      <sutekis-table :sutekis="sutekis" />
+      <sutekis-table :sutekis="sutekis" @open-modal="openModal" />
     </div>
-    <form-modal
-      v-if="isModalOpen"
-      :is-submittable="isSubmittable"
-      @close-modal="closeModal"
-      @update-date="updateParams('date', $event)"
-      @update-text="updateParams('text', $event)"
-      @update-price="updateParams('price', Math.floor($event))"
-      @submit="submit"
-    />
+    <transition name="modal">
+      <form-modal
+        v-if="isModalOpen"
+        :is-submittable="isSubmittable"
+        :date="params.date || ''"
+        :text="params.text || ''"
+        :price="+params.price"
+        @close-modal="closeModal"
+        @update-date="updateParams('date', $event)"
+        @update-text="updateParams('text', $event)"
+        @update-price="updateParams('price', Math.floor($event))"
+        @submit="submit"
+      />
+    </transition>
   </div>
 </template>
 
@@ -64,7 +69,14 @@ export default {
       this.$store.dispatch('me/signOut')
     },
 
-    openModal() {
+    openModal(suteki) {
+      if (suteki) {
+        this.updateParams('id', suteki.id)
+        this.updateParams('date', suteki.date)
+        this.updateParams('text', suteki.text)
+        this.updateParams('price', suteki.price)
+      }
+
       this.isModalOpen = true
     },
 
@@ -80,7 +92,7 @@ export default {
       if (!this.isSubmittable) return
 
       this.updateParams('userId', this.$store.state.me.id)
-      this.$store.dispatch('suteki/addSuteki')
+      this.$store.dispatch('suteki/addOrUpdateSuteki', this.params)
       this.closeModal()
     },
   },
@@ -110,5 +122,14 @@ export default {
     right: 20px;
     bottom: 20px;
   }
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.2s;
+}
+
+.modal-enter, .modal-leave-to /* .modal-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

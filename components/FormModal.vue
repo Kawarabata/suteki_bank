@@ -6,12 +6,17 @@
   >
     <div class="modal">
       <label>
-        <input type="date" @input="$emit('update-date', $event.target.value)" />
+        <input
+          type="date"
+          :value="date"
+          @input="$emit('update-date', $event.target.value)"
+        />
       </label>
       <label>
         <input
           type="text"
           placeholder="良いこと"
+          :value="text"
           @input="$emit('update-text', $event.target.value)"
         />
       </label>
@@ -20,11 +25,12 @@
           type="number"
           placeholder="金額"
           min="1"
+          :value="price"
           @input="$emit('update-price', $event.target.value)"
         />
       </label>
       <button type="submit" :class="{ submittable: isSubmittable }">
-        貯める
+        保存
       </button>
     </div>
   </form>
@@ -33,6 +39,18 @@
 <script>
 export default {
   props: {
+    date: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
     isSubmittable: {
       type: Boolean,
       required: true,
